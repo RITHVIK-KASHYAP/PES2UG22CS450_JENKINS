@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                shh 'g++ -o output PES2UG22CS450.cpp' // Intentional typo in 'sh'
+                sh 'g++ -o output PES2UG22CS450.cpp' // Intentional typo in 'sh'
             }
         }
 
