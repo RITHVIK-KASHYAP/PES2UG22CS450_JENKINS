@@ -4,19 +4,28 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'g++ -o output PES2UG22CS450.cpp' // Intentional typo in 'sh'
+                sh 'mvn clean install'
+                echo 'Build Stage Successful'
             }
         }
-
         stage('Test') {
             steps {
-                sh './output'
+                sh 'mvn test' 
+                echo 'Test Stage Successful'
+                post {
+                    always {
+                            junit 'target/surefire-reports/*.xml'
+                                }
+                    }
+
             }
         }
 
         stage('Deploy') {
             steps {
-                echo 'Deploying application...'
+                sh 'mvn deploy'
+                echo 'Deployment Successful'
+
             }
         }
     }
